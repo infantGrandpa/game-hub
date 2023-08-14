@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 
@@ -15,13 +15,13 @@ function App() {
             </GridItem>
             <Show above="md">
                 <GridItem area="aside">
-                    <Container>Aside</Container>
+                    <Box>Aside</Box>
                 </GridItem>
             </Show>
             <GridItem area="main">
-                <Container>
+                <Box>
                     <GameGrid />
-                </Container>
+                </Box>
             </GridItem>
         </Grid>
     );
