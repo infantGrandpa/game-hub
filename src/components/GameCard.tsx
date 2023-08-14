@@ -16,7 +16,7 @@ interface Props {
 }
 const GameCard = ({ game }: Props) => {
     return (
-        <Card>
+        <Card h="100%">
             <AspectRatio ratio={16 / 9}>
                 <Image src={getCroppedImageUrl(game.background_image)} />
             </AspectRatio>
