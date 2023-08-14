@@ -20,7 +20,7 @@ const GameCard = ({ game }: Props) => {
             <AspectRatio ratio={16 / 9}>
                 <Image src={getCroppedImageUrl(game.background_image)} />
             </AspectRatio>
-            <CardBody>
+            <CardBody alignContent={"end"}>
                 <Heading fontSize={"2xl"}>{game.name}</Heading>
                 <HStack justifyContent={"space-between"}>
                     <PlatformIconList
