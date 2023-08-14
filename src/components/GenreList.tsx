@@ -9,8 +9,11 @@ import useGenres from "../hooks/useGenres";
 import GenreItem from "./GenreItem";
 
 const GenreList = () => {
-    const { data, isLoading } = useGenres();
+    const { data, isLoading, error } = useGenres();
     const skeletons = Array.from({ length: 19 }, (_, index) => index + 1);
+
+    if (error) return null;
+
     return (
         <List spacing={4}>
             {isLoading &&
