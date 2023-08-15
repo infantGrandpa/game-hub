@@ -11,9 +11,10 @@ import GenreItem from "./GenreItem";
 
 interface Props {
     onSelectGenre: (genre: Genre | null) => void;
+    selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
     const { data, isLoading, error } = useGenres();
     const skeletons = Array.from({ length: 19 }, (_, index) => index + 1);
 
@@ -37,6 +38,7 @@ const GenreList = ({ onSelectGenre }: Props) => {
                         <GenreItem
                             onSelectGenre={onSelectGenre}
                             genre={genre}
+                            isSelected={genre?.id === selectedGenre?.id}
                         />
                     </HStack>
                 </ListItem>

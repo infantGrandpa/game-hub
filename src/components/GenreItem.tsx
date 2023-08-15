@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Slide } from "@chakra-ui/react";
 import { Genre } from "../hooks/useGenres";
 import { IconType } from "react-icons";
 import {
@@ -27,9 +27,10 @@ import { LuBinary } from "react-icons/lu";
 interface Props {
     genre: Genre;
     onSelectGenre: (genre: Genre) => void;
+    isSelected: boolean;
 }
 
-const GenreItem = ({ genre, onSelectGenre }: Props) => {
+const GenreItem = ({ genre, onSelectGenre, isSelected }: Props) => {
     const iconMap: { [key: string]: IconType } = {
         action: GiBattleGear,
         indie: HiUserGroup,
@@ -63,6 +64,8 @@ const GenreItem = ({ genre, onSelectGenre }: Props) => {
                 w="100%"
                 leftIcon={<IconComponent size="2em" />}
                 justifyContent={"flex-start"}
+                paddingLeft={isSelected ? 6 : 2}
+                transition={"padding-left 200ms ease-out"}
             >
                 {genre.name}
             </Button>
