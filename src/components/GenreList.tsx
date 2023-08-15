@@ -1,5 +1,4 @@
 import {
-    Button,
     HStack,
     List,
     ListItem,
@@ -22,9 +21,6 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
     return (
         <List spacing={3}>
-            <Button w="100%" onClick={() => onSelectGenre(null)}>
-                Clear Filters
-            </Button>
             {isLoading &&
                 skeletons.map((skeleton) => (
                     <HStack key={skeleton}>
