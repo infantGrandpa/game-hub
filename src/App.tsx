@@ -1,11 +1,4 @@
-import {
-    Button,
-    Grid,
-    GridItem,
-    HStack,
-    Heading,
-    Show,
-} from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Heading, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -15,21 +8,22 @@ import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/usePlatforms";
 import ClearFiltersButton from "./components/ClearFiltersButton";
 
+export interface GameQuery {
+    genre: Genre | null;
+    platform: Platform | null;
+}
+
 function App() {
-    const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-    const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
-        null
-    );
+    const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
     const clearAllFilters = () => {
-        setSelectedGenre(null);
-        setSelectedPlatform(null);
+        setGameQuery({ ...gameQuery, genre: null, platform: null });
     };
 
     const heading =
-        (selectedGenre?.name || "All") +
+        (gameQuery.genre?.name || "All") +
         " Games" +
-        (selectedPlatform ? ` on ${selectedPlatform.name}` : "");
+        (gameQuery.platform ? ` on ${gameQuery.platform.name}` : "");
 
     return (
         <Grid
@@ -49,8 +43,10 @@ function App() {
                 <GridItem area="aside" paddingX={3}>
                     <ClearFiltersButton onClearFilters={clearAllFilters} />
                     <GenreList
-                        onSelectGenre={(genre) => setSelectedGenre(genre)}
-                        selectedGenre={selectedGenre}
+                        onSelectGenre={(genre) =>
+                            setGameQuery({ ...gameQuery, genre })
+                        }
+                        selectedGenre={gameQuery.genre}
                     />
                 </GridItem>
             </Show>
@@ -66,15 +62,12 @@ function App() {
                     </Heading>
                     <PlatformSelector
                         onSelectPlatform={(platform) =>
-                            setSelectedPlatform(platform)
+                            setGameQuery({ ...gameQuery, platform })
                         }
-                        selectedPlatform={selectedPlatform}
+                        selectedPlatform={gameQuery.platform}
                     />
                 </HStack>
-                <GameGrid
-                    selectedGenre={selectedGenre}
-                    selectedPlatform={selectedPlatform}
-                />
+                <GameGrid gameQuery={gameQuery} />
             </GridItem>
         </Grid>
     );
