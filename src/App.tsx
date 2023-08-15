@@ -7,6 +7,7 @@ import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/usePlatforms";
 import ClearFiltersButton from "./components/ClearFiltersButton";
+import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
     genre: Genre | null;
@@ -51,21 +52,17 @@ function App() {
                 </GridItem>
             </Show>
             <GridItem area="main" paddingX="15px">
-                <HStack justifyContent="space-between">
-                    <Heading
-                        as="h1"
-                        size="xl"
-                        marginBottom={3}
-                        transition="height 1000ms ease"
-                    >
-                        {heading}
-                    </Heading>
+                <Heading as="h1" size="xl" transition="height 1000ms ease">
+                    {heading}
+                </Heading>
+                <HStack marginY={3}>
                     <PlatformSelector
                         onSelectPlatform={(platform) =>
                             setGameQuery({ ...gameQuery, platform })
                         }
                         selectedPlatform={gameQuery.platform}
                     />
+                    <SortSelector />
                 </HStack>
                 <GameGrid gameQuery={gameQuery} />
             </GridItem>
