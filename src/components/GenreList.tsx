@@ -1,4 +1,5 @@
 import {
+    Button,
     HStack,
     List,
     ListItem,
@@ -9,7 +10,7 @@ import useGenres, { Genre } from "../hooks/useGenres";
 import GenreItem from "./GenreItem";
 
 interface Props {
-    onSelectGenre: (genre: Genre) => void;
+    onSelectGenre: (genre: Genre | null) => void;
 }
 
 const GenreList = ({ onSelectGenre }: Props) => {
@@ -20,6 +21,9 @@ const GenreList = ({ onSelectGenre }: Props) => {
 
     return (
         <List spacing={3}>
+            <Button w="100%" onClick={() => onSelectGenre(null)}>
+                Clear Filters
+            </Button>
             {isLoading &&
                 skeletons.map((skeleton) => (
                     <HStack key={skeleton}>
@@ -30,7 +34,10 @@ const GenreList = ({ onSelectGenre }: Props) => {
             {data.map((genre) => (
                 <ListItem key={genre.id}>
                     <HStack>
-                        <GenreItem onSelectGenre={onSelectGenre} genre={genre} />
+                        <GenreItem
+                            onSelectGenre={onSelectGenre}
+                            genre={genre}
+                        />
                     </HStack>
                 </ListItem>
             ))}
