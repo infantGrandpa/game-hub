@@ -5,28 +5,32 @@ import {
     Skeleton,
     SkeletonText,
 } from "@chakra-ui/react";
-import useGenres from "../hooks/useGenres";
+import useGenres, { Genre } from "../hooks/useGenres";
 import GenreItem from "./GenreItem";
 
-const GenreList = () => {
+interface Props {
+    onSelectGenre: (genre: Genre) => void;
+}
+
+const GenreList = ({ onSelectGenre }: Props) => {
     const { data, isLoading, error } = useGenres();
     const skeletons = Array.from({ length: 19 }, (_, index) => index + 1);
 
     if (error) return null;
 
     return (
-        <List spacing={4}>
+        <List spacing={3}>
             {isLoading &&
                 skeletons.map((skeleton) => (
                     <HStack key={skeleton}>
                         <Skeleton boxSize="32px"></Skeleton>
-                        <SkeletonText noOfLines={1} w="60%" />
+                        <SkeletonText noOfLines={1} w="175px" />
                     </HStack>
                 ))}
             {data.map((genre) => (
                 <ListItem key={genre.id}>
                     <HStack>
-                        <GenreItem genre={genre} />
+                        <GenreItem onSelectGenre={onSelectGenre} genre={genre} />
                     </HStack>
                 </ListItem>
             ))}

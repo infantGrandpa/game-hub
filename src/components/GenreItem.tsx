@@ -1,5 +1,4 @@
-import { Icon, Image, Text } from "@chakra-ui/react";
-import getCroppedImageUrl from "../services/image-url";
+import { Button } from "@chakra-ui/react";
 import { Genre } from "../hooks/useGenres";
 import { IconType } from "react-icons";
 import {
@@ -27,9 +26,10 @@ import { LuBinary } from "react-icons/lu";
 
 interface Props {
     genre: Genre;
+    onSelectGenre: (genre: Genre) => void;
 }
 
-const GenreItem = ({ genre }: Props) => {
+const GenreItem = ({ genre, onSelectGenre }: Props) => {
     const iconMap: { [key: string]: IconType } = {
         action: GiBattleGear,
         indie: HiUserGroup,
@@ -52,10 +52,20 @@ const GenreItem = ({ genre }: Props) => {
         card: GiCardRandom,
     };
 
+    const IconComponent = iconMap[genre.slug];
+
     return (
         <>
-            <Icon boxSize="32px" as={iconMap[genre.slug]} color="gray.500" />
-            <Text fontSize="md">{genre.name}</Text>
+            <Button
+                onClick={() => onSelectGenre(genre)}
+                size="md"
+                variant="ghost"
+                w="100%"
+                leftIcon={<IconComponent size="2em" />}
+                justifyContent={"flex-start"}
+            >
+                {genre.name}
+            </Button>
         </>
     );
 };
