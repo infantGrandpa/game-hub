@@ -1,4 +1,4 @@
-import { Button, Slide } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { Genre } from "../hooks/useGenres";
 import { IconType } from "react-icons";
 import {
