@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Heading, SimpleGrid } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -15,7 +15,12 @@ const GameGrid = ({ gameQuery }: Props) => {
 
     return (
         <>
-            {error && <Text>{error}</Text>}
+            {error && (
+                <Alert status="error" borderRadius={4}>
+                    <AlertIcon />
+                    There was an error processing your request: {error}
+                </Alert>
+            )}
             <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={3}>
                 {isLoading &&
                     skeletons.map((skeleton) => (
@@ -23,17 +28,18 @@ const GameGrid = ({ gameQuery }: Props) => {
                             <GameCardSkeleton />
                         </GameCardContainer>
                     ))}
-                {Array.isArray(data) && data.length > 0 ? (
-                    data.map((game) => (
-                        <GameCardContainer key={game.id}>
-                            <GameCard game={game} />
-                        </GameCardContainer>
-                    ))
-                ) : (
-                    <Heading as="h2" size="lg">
-                        No Games Found!
-                    </Heading>
-                )}
+                {Array.isArray(data) && data.length > 0
+                    ? data.map((game) => (
+                          <GameCardContainer key={game.id}>
+                              <GameCard game={game} />
+                          </GameCardContainer>
+                      ))
+                    : !isLoading &&
+                      !error && (
+                          <Heading as="h2" size="lg">
+                              No Games Found!
+                          </Heading>
+                      )}
             </SimpleGrid>
         </>
     );

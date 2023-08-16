@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 
 const SearchInput = () => {
     return (
-        <InputGroup marginX={5}>
+        <InputGroup>
             <InputLeftElement children={<BsSearch />} />
             <Input
                 borderRadius={25}
