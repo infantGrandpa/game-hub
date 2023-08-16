@@ -5,13 +5,11 @@ import SearchInput from "./SearchInput";
 
 const NavBar = () => {
     return (
-        <Box justifyContent="space-between" flexWrap="wrap" p="10px">
+        <Flex justifyContent="space-between" flexWrap="nowrap" p="10px">
             <Image src={logo} boxSize={"48px"} borderRadius={4}></Image>
-            <Box marginX={5} order={{ base: 3, md: "initial" }}>
-                <SearchInput />
-            </Box>
+            <SearchInput />
             <ColorModeSwitch />
-        </Box>
+        </Flex>
     );
 };
 
