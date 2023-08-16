@@ -4,7 +4,6 @@ import {
     Accordion,
     AccordionItem,
     AccordionButton,
-    AccordionIcon,
     Box,
     AccordionPanel,
     Icon,

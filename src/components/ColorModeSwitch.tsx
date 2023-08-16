@@ -2,8 +2,6 @@ import {
     Button,
     HStack,
     Icon,
-    Switch,
-    Text,
     VisuallyHidden,
     useColorMode,
 } from "@chakra-ui/react";
