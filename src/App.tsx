@@ -32,6 +32,7 @@ function App() {
             templateColumns={{
                 base: "1fr",
                 md: "1fr 5fr",
+                lg: "2fr 3fr",
             }}
         >
             <GridItem area="nav">
@@ -41,8 +42,9 @@ function App() {
                     }
                 />
             </GridItem>
+
             <Show above="md">
-                <GridItem area="aside" paddingX={3}>
+                <GridItem area="aside" paddingX={3} className="sidebar">
                     <ClearFiltersButton onClearFilters={clearAllFilters} />
                     <GenreList
                         onSelectGenre={(genre) =>
@@ -52,7 +54,7 @@ function App() {
                     />
                 </GridItem>
             </Show>
-            <GridItem area="main" paddingX="15px">
+            <GridItem area="main" paddingX="15px" className="content">
                 <GameHeading gameQuery={gameQuery} />
                 <FiltersMenu
                     gameQuery={gameQuery}

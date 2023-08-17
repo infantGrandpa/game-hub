@@ -22,16 +22,16 @@ const GameCard = ({ game }: Props) => {
                     src={getCroppedImageUrl(game.background_image, game.name)}
                 />
             </AspectRatio>
-            <CardBody alignContent={"end"}>
-                <Heading as="h3" size="md">
-                    {game.name}
-                </Heading>
-                <HStack justifyContent={"space-between"}>
+            <CardBody alignContent={"end"} paddingTop={2}>
+                <HStack justifyContent={"space-between"} marginBottom={2}>
                     <PlatformIconList
                         platforms={game.parent_platforms.map((p) => p.platform)}
                     />
                     <CriticScore score={game.metacritic} />
                 </HStack>
+                <Heading as="h3" size="md">
+                    {game.name}
+                </Heading>
             </CardBody>
         </Card>
     );
