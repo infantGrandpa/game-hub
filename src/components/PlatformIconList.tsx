@@ -9,7 +9,7 @@ import {
 import { MdPhoneIphone } from "react-icons/md";
 import { BsGlobe, BsNintendoSwitch } from "react-icons/bs";
 import { Platform } from "../hooks/usePlatforms";
-import { HStack, Icon } from "@chakra-ui/react";
+import { Box, HStack, Icon, VisuallyHidden } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 interface Props {
@@ -30,15 +30,17 @@ const PlatformIconList = ({ platforms }: Props) => {
     };
 
     return (
-        <HStack marginTop={2}>
-            {platforms.map((platform) => (
-                <Icon
-                    key={platform.id}
-                    as={iconMap[platform.slug]}
-                    color="gray.500"
-                />
-            ))}
-        </HStack>
+        <>
+            <VisuallyHidden>Available on:</VisuallyHidden>
+            <HStack marginTop={2}>
+                {platforms.map((platform) => (
+                    <Box key={platform.id}>
+                        <Icon as={iconMap[platform.slug]} color="gray.500" />
+                        <VisuallyHidden>{platform.name}</VisuallyHidden>
+                    </Box>
+                ))}
+            </HStack>
+        </>
     );
 };
 
