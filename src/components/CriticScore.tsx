@@ -1,4 +1,4 @@
-import { Badge } from "@chakra-ui/react";
+import { Badge, VisuallyHidden } from "@chakra-ui/react";
 
 interface Props {
     score: number;
@@ -9,6 +9,7 @@ const CriticScore = ({ score }: Props) => {
 
     return (
         <Badge colorScheme={color} fontSize={"14px"} paddingX={2} marginTop={2}>
+            <VisuallyHidden>Critic Score: </VisuallyHidden>
             {score}
         </Badge>
     );

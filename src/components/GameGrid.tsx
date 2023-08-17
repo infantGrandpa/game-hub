@@ -1,4 +1,10 @@
-import { Alert, AlertIcon, Heading, SimpleGrid } from "@chakra-ui/react";
+import {
+    Alert,
+    AlertIcon,
+    Heading,
+    SimpleGrid,
+    useBreakpointValue,
+} from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -11,7 +17,11 @@ interface Props {
 
 const GameGrid = ({ gameQuery }: Props) => {
     const { data, error, isLoading } = useGames(gameQuery);
-    const skeletons = Array.from({ length: 10 }, (_, index) => index + 1);
+    const skeletonCount = useBreakpointValue({ base: 3, md: 10, lg: 15 }) || 3;
+    const skeletons = Array.from(
+        { length: skeletonCount },
+        (_, index) => index + 1
+    );
 
     return (
         <>
@@ -21,8 +31,7 @@ const GameGrid = ({ gameQuery }: Props) => {
                     There was an error processing your request: {error}
                 </Alert>
             )}
-            <SimpleGrid columns={{ sm: 1, md: 2, lg: 3
-             }} spacing={5}>
+            <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={5}>
                 {isLoading &&
                     skeletons.map((skeleton) => (
                         <GameCardContainer key={skeleton}>
