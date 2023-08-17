@@ -1,4 +1,4 @@
-import { Grid, GridItem, Heading, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -7,6 +7,7 @@ import { Genre } from "./hooks/useGenres";
 import { Platform } from "./hooks/usePlatforms";
 import ClearFiltersButton from "./components/ClearFiltersButton";
 import FiltersMenu from "./components/FiltersMenu";
+import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
     genre: Genre | null;
@@ -21,11 +22,6 @@ function App() {
     const clearAllFilters = () => {
         setGameQuery({ ...gameQuery, genre: null, platform: null });
     };
-
-    const heading =
-        (gameQuery.genre?.name || "All") +
-        " Games" +
-        (gameQuery.platform ? ` on ${gameQuery.platform.name}` : "");
 
     return (
         <Grid
@@ -57,10 +53,7 @@ function App() {
                 </GridItem>
             </Show>
             <GridItem area="main" paddingX="15px">
-                <Heading as="h1" size="xl">
-                    {heading}
-                </Heading>
-
+                <GameHeading gameQuery={gameQuery} />
                 <FiltersMenu
                     gameQuery={gameQuery}
                     onSelectPlatform={(platform) =>
