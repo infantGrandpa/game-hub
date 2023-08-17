@@ -8,7 +8,6 @@ import {
     Center,
     CloseButton,
     Heading,
-    Icon,
     SimpleGrid,
     Spacer,
     useBreakpointValue,
