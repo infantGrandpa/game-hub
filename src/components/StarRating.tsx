@@ -11,16 +11,18 @@ const StarRating = ({ rating }: Props) => {
     const isHalfNumber = roundedRating % 1 === 0.5;
     const emptyStars = 5 - roundedRating;
 
+    const starColor = "blackAlpha.600";
+
     return (
         <>
             <VisuallyHidden>Rating of {roundedRating}</VisuallyHidden>
             <HStack marginTop={1}>
                 {Array.from({ length: roundedRating }, (_, index) => (
-                    <Icon key={index} as={BsStarFill} color="gray.500" />
+                    <Icon key={index} as={BsStarFill} color={starColor} />
                 ))}
-                {isHalfNumber && <Icon as={BsStarHalf} color="gray.500" />}
+                {isHalfNumber && <Icon as={BsStarHalf} color={starColor} />}
                 {Array.from({ length: emptyStars }, (_, index) => (
-                    <Icon key={index} as={BsStar} color="gray.500" />
+                    <Icon key={index} as={BsStar} color={starColor} />
                 ))}
             </HStack>
         </>
