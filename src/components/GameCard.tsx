@@ -1,11 +1,12 @@
 import { Game } from "../hooks/useGames";
 import {
     AspectRatio,
+    Box,
+    Button,
     Card,
     CardBody,
     HStack,
     Heading,
-    Image,
 } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
@@ -17,11 +18,27 @@ interface Props {
 }
 const GameCard = ({ game }: Props) => {
     return (
-        <Card h="100%" bg="blackAlpha.300">
+        <Card h="100%" bg="blackAlpha.300" role="group">
             <AspectRatio ratio={16 / 9}>
-                <Image
-                    src={getCroppedImageUrl(game.background_image, game.name)}
-                />
+                <Box
+                    bgImage={getCroppedImageUrl(
+                        game.background_image,
+                        game.name
+                    )}
+                    bgSize="cover"
+                    bgPosition="center"
+                    bgRepeat="no-repeat"
+                >
+                    <Button
+                        variant="solid"
+                        colorScheme="gray"
+                        backgroundColor="blackAlpha.700"
+                        opacity="0"
+                        _groupHover={{ opacity: "1" }}
+                    >
+                        Quick look
+                    </Button>
+                </Box>
             </AspectRatio>
             <CardBody alignContent={"end"} paddingTop={2} paddingBottom={4}>
                 <HStack justifyContent={"space-between"}>
