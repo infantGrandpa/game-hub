@@ -26,6 +26,7 @@ interface Props {
 
 const GameGrid = ({ gameQuery }: Props) => {
     const { data, error, isLoading } = useGames(gameQuery);
+
     const skeletonCount = useBreakpointValue({ base: 3, md: 10, lg: 15 }) || 3;
     const skeletons = Array.from(
         { length: skeletonCount },

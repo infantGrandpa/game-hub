@@ -11,8 +11,8 @@ export interface Game {
     rating: number;
 }
 
-const useGames = (gameQuery: GameQuery) =>
-    useData<Game>(
+const useGames = (gameQuery: GameQuery) => {
+    const response = useData<Game>(
         "/games",
         {
             params: {
@@ -24,5 +24,8 @@ const useGames = (gameQuery: GameQuery) =>
         },
         [gameQuery]
     );
+
+    return response;
+};
 
 export default useGames;

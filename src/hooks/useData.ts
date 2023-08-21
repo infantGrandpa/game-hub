@@ -10,7 +10,8 @@ interface FetchResponse<DataType> {
 const useData = <DataType>(
     endpoint: string,
     requestConfig?: AxiosRequestConfig,
-    dependencies?: any[]
+    dependencies?: any[],
+    transformResponse?: (response: any) => DataType[]
 ) => {
     const [data, setData] = useState<DataType[]>([]);
     const [error, setError] = useState("");
@@ -27,7 +28,10 @@ const useData = <DataType>(
                     ...requestConfig,
                 })
                 .then((res) => {
-                    setData(res.data.results);
+                    const transformedData = transformResponse
+                        ? transformResponse(res.data)
+                        : res.data.results;
+                    setData(transformedData);
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -36,7 +40,9 @@ const useData = <DataType>(
                     setLoading(false);
                 });
 
-            return () => controller.abort();
+            return () => {
+                controller.abort();
+            };
         },
         dependencies ? [...dependencies] : []
     );

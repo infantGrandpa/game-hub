@@ -7,16 +7,20 @@ import {
     CardBody,
     HStack,
     Heading,
+    useDisclosure,
 } from "@chakra-ui/react";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageUrl from "../services/image-url";
 import StarRating from "./StarRating";
+import QuickLookWindow from "./QuickLookWindow";
 
 interface Props {
     game: Game;
 }
 const GameCard = ({ game }: Props) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <Card h="100%" bg="blackAlpha.300" role="group">
             <AspectRatio ratio={16 / 9}>
@@ -35,6 +39,7 @@ const GameCard = ({ game }: Props) => {
                         backgroundColor="blackAlpha.700"
                         opacity="0"
                         _groupHover={{ opacity: "1" }}
+                        onClick={onOpen}
                     >
                         Quick look
                     </Button>
@@ -52,6 +57,7 @@ const GameCard = ({ game }: Props) => {
                     platforms={game.parent_platforms.map((p) => p.platform)}
                 />
             </CardBody>
+            <QuickLookWindow game={game} isOpen={isOpen} onClose={onClose} />
         </Card>
     );
 };
