@@ -1,15 +1,8 @@
 import {
-    Alert,
-    AlertDescription,
-    AlertIcon,
-    AlertTitle,
-    Box,
     Button,
     Center,
-    CloseButton,
     Heading,
     SimpleGrid,
-    Spacer,
     useBreakpointValue,
 } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
@@ -17,8 +10,8 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { GameQuery } from "../App";
-import { useState } from "react";
 import { FaArrowsRotate } from "react-icons/fa6";
+import AlertNotification from "./AlertNotification";
 
 interface Props {
     gameQuery: GameQuery;
@@ -33,24 +26,10 @@ const GameGrid = ({ gameQuery }: Props) => {
         (_, index) => index + 1
     );
 
-    const [showAlert, setShowAlert] = useState(true);
-
-    if (error && showAlert)
+    if (error)
         return (
             <>
-                <Alert status="error" borderRadius={4}>
-                    <AlertIcon />
-                    <Box>
-                        <AlertTitle>
-                            Oh no! There was an error processing your request.
-                        </AlertTitle>
-                        <AlertDescription fontStyle="italic">
-                            {error}
-                        </AlertDescription>
-                    </Box>
-                    <Spacer />
-                    <CloseButton onClick={() => setShowAlert(false)} />
-                </Alert>
+                <AlertNotification errorMessage={error} />
                 <Center marginTop={5}>
                     <Button
                         onClick={() => window.location.reload()}

@@ -17,8 +17,6 @@ const useGameDetails = (id: number) => {
         (response) => response
     );
 
-    console.log(response.data);
-
     return {
         data: response.data as unknown as GameDetails,
         error: response.error,

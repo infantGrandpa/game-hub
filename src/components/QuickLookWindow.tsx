@@ -7,9 +7,11 @@ import {
     ModalCloseButton,
     Spinner,
     Text,
+    Image,
 } from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
 import useGameDetails from "../hooks/useGameDetails";
+import AlertNotification from "./AlertNotification";
 
 interface Props {
     game: Game;
@@ -24,6 +26,10 @@ const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
 
     if (isLoading) return <Spinner />;
 
+    if (!data) {
+        return <AlertNotification errorMessage={error} />;
+    }
+
     return (
         <Modal
             isOpen={isOpen}
@@ -36,7 +42,8 @@ const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
                 <ModalHeader>{game.name}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    {data ? data.description_raw : "No description available"}
+                    <Image src={data.background_image} />
+                    <Text>{data.description_raw}</Text>
                 </ModalBody>
             </ModalContent>
         </Modal>
