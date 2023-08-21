@@ -6,6 +6,7 @@ export interface GameDetails {
     name: string;
     description: string;
     description_raw: string;
+    background_image: string;
 }
 
 const useGameDetails = (id: number) => {
@@ -16,9 +17,13 @@ const useGameDetails = (id: number) => {
         (response) => response
     );
 
-    console.log(response);
+    console.log(response.data);
 
-    return response;
+    return {
+        data: response.data as unknown as GameDetails,
+        error: response.error,
+        isLoading: response.isLoading,
+    };
 };
 
 export default useGameDetails;

@@ -25,13 +25,18 @@ const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
     if (isLoading) return <Spinner />;
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            closeOnOverlayClick={false}
+            size="xl"
+        >
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>{game.name}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    {/* {data ? data.description_raw : "No description available"} */}
+                    {data ? data.description_raw : "No description available"}
                 </ModalBody>
             </ModalContent>
         </Modal>
