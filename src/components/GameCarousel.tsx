@@ -1,8 +1,8 @@
 import { Container, Image, Spinner, Text } from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
-import useScreenshots, { Screenshot } from "../hooks/useScreenshots";
+import useScreenshots from "../hooks/useScreenshots";
 import AlertNotification from "./AlertNotification";
-import Carousel from "./Carousel";
+import getCroppedImageUrl from "../services/image-url";
 
 interface Props {
     game: Game;
@@ -15,15 +15,15 @@ const GameCarousel = ({ game }: Props) => {
 
     if (isLoading) return <Spinner />;
 
-    const results = data.results;
-    console.log(results);
-
     return (
         <div>
             {/* Mapping through results and rendering an image for each item */}
-            {Array.isArray(results) && results.length > 0 ? (
-                results.map((screenshot) => (
-                    <Image key={screenshot.id} src={screenshot.image} />
+            {Array.isArray(data) && data.length > 0 ? (
+                data.map((screenshot) => (
+                    <Image
+                        key={screenshot.id}
+                        src={getCroppedImageUrl(screenshot.image)}
+                    />
                 ))
             ) : (
                 <Container
@@ -33,8 +33,6 @@ const GameCarousel = ({ game }: Props) => {
                     borderColor="gray.200"
                 >
                     <Text>Invalid data</Text>
-                    <Text>Array: {Array.isArray(data)}</Text>
-                    <Text>Length: {data.length}</Text>
                 </Container>
             )}
         </div>

@@ -9,12 +9,7 @@ export interface Screenshot {
 }
 
 const useScreenshots = (id: number) => {
-    const response = useData<Screenshot>(
-        `games/${id}/screenshots`,
-        undefined,
-        undefined,
-        (response) => response
-    );
+    const response = useData<Screenshot>(`games/${id}/screenshots`);
 
     return response;
 };
