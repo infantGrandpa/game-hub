@@ -11,7 +11,7 @@ export interface GameDetails {
 
 const useGameDetails = (id: number) => {
     const response = useData<GameDetails>(
-        "/games/" + id,
+        `games/${id}`,
         undefined,
         undefined,
         (response) => response
