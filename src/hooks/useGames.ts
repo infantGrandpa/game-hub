@@ -9,6 +9,14 @@ export interface Game {
     parent_platforms: { platform: Platform }[];
     metacritic: number;
     rating: number;
+    stores: Store[];
+}
+
+export interface Store {
+    id: 7;
+    name: string;
+    slug: string;
+    domain: string;
 }
 
 const useGames = (gameQuery: GameQuery) => {
