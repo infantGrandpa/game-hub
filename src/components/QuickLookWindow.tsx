@@ -6,12 +6,8 @@ import {
     ModalBody,
     ModalCloseButton,
     Spinner,
-    Text,
-    HStack,
     Button,
     Divider,
-    SimpleGrid,
-    Box,
 } from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
 import useGameDetails from "../hooks/useGameDetails";
@@ -19,6 +15,7 @@ import AlertNotification from "./AlertNotification";
 import GameCarousel from "./GameCarousel";
 import ImageContainer from "./ImageContainer";
 import StoreLinks from "./StoreLinks";
+import CreatorList from "./CreatorList";
 
 interface Props {
     game: Game;
@@ -62,6 +59,7 @@ const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
                     <StoreLinks stores={game.stores} />
                     <Divider marginY={2} />
                     <Button>View Full Details</Button>
+                    <CreatorList game={game} />
                     <div dangerouslySetInnerHTML={theObj} />
                 </ModalBody>
             </ModalContent>
