@@ -15,7 +15,6 @@ import AlertNotification from "./AlertNotification";
 import GameCarousel from "./GameCarousel";
 import ImageContainer from "./ImageContainer";
 import StoreLinks from "./StoreLinks";
-import CreatorList from "./CreatorList";
 
 interface Props {
     game: Game;
@@ -26,13 +25,9 @@ interface Props {
 const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
     const { data, error, isLoading } = useGameDetails(game.id);
 
-    if (error) return <AlertNotification errorMessage={error} />;
+    if (error || !data) return <AlertNotification errorMessage={error} />;
 
     if (isLoading) return <Spinner />;
-
-    if (!data) {
-        return <AlertNotification errorMessage={error} />;
-    }
 
     const htmlString = data.description;
     const theObj = { __html: htmlString };
@@ -56,10 +51,8 @@ const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
                     </ImageContainer>
 
                     <Divider marginY={2} />
-                    <StoreLinks stores={game.stores} />
+                    <StoreLinks game={game} />
                     <Divider marginY={2} />
-                    <Button>View Full Details</Button>
-                    <CreatorList game={game} />
                     <div dangerouslySetInnerHTML={theObj} />
                 </ModalBody>
             </ModalContent>

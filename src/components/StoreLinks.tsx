@@ -1,16 +1,41 @@
-import { HStack, Button } from "@chakra-ui/react";
-import { Store } from "../hooks/useGames";
+import { HStack, Button, Spinner, Flex } from "@chakra-ui/react";
+import useStores, { getDirectStoreLinkFromStore } from "../hooks/useStores";
+import { Game } from "../hooks/useGames";
+import AlertNotification from "./AlertNotification";
 
 interface Props {
-    stores: Store[];
+    game: Game;
 }
 
-const StoreLinks = ({ stores }: Props) => {
-    console.log(stores);
+const StoreLinks = ({ game }: Props) => {
+    const { data, error, isLoading } = useStores(game.id);
+
+    if (error || !data) {
+        return <AlertNotification errorMessage={error} />;
+    }
+
+    if (isLoading) {
+        return (
+            <Flex justifyContent="center">
+                <Spinner />;
+            </Flex>
+        );
+    }
+
     return (
         <HStack>
-            {stores.map((store) => (
-                <Button key={store.id}>{store.name}</Button>
+            {game.stores.map((store) => (
+                <>
+                    <a
+                        href={
+                            getDirectStoreLinkFromStore(store.store, data)?.url
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Button key={store.store.id}>{store.store.name}</Button>
+                    </a>
+                </>
             ))}
         </HStack>
     );

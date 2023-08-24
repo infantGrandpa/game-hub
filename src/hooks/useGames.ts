@@ -1,6 +1,7 @@
 import { GameQuery } from "../App";
 import useData from "./useData";
 import { Platform } from "./usePlatforms";
+import { Store } from "./useStores";
 
 export interface Game {
     id: number;
@@ -9,14 +10,7 @@ export interface Game {
     parent_platforms: { platform: Platform }[];
     metacritic: number;
     rating: number;
-    stores: Store[];
-}
-
-export interface Store {
-    id: 7;
-    name: string;
-    slug: string;
-    domain: string;
+    stores: { store: Store }[];
 }
 
 const useGames = (gameQuery: GameQuery) => {
