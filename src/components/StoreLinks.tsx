@@ -25,17 +25,14 @@ const StoreLinks = ({ game }: Props) => {
     return (
         <HStack>
             {game.stores.map((store) => (
-                <>
-                    <a
-                        href={
-                            getDirectStoreLinkFromStore(store.store, data)?.url
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Button key={store.store.id}>{store.store.name}</Button>
-                    </a>
-                </>
+                <a
+                    href={getDirectStoreLinkFromStore(store.store, data)?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    key={store.store.id}
+                >
+                    <Button>{store.store.name}</Button>
+                </a>
             ))}
         </HStack>
     );

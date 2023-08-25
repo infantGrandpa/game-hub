@@ -57,7 +57,13 @@ const GameCard = ({ game }: Props) => {
                     platforms={game.parent_platforms.map((p) => p.platform)}
                 />
             </CardBody>
-            <QuickLookWindow game={game} isOpen={isOpen} onClose={onClose} />
+            {isOpen && (
+                <QuickLookWindow
+                    game={game}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                />
+            )}
         </Card>
     );
 };

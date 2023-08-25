@@ -6,8 +6,8 @@ import {
     ModalBody,
     ModalCloseButton,
     Spinner,
-    Button,
     Divider,
+    Text,
 } from "@chakra-ui/react";
 import { Game } from "../hooks/useGames";
 import useGameDetails from "../hooks/useGameDetails";
@@ -15,6 +15,7 @@ import AlertNotification from "./AlertNotification";
 import GameCarousel from "./GameCarousel";
 import ImageContainer from "./ImageContainer";
 import StoreLinks from "./StoreLinks";
+import truncateText from "../services/truncate-text";
 
 interface Props {
     game: Game;
@@ -25,14 +26,9 @@ interface Props {
 const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
     const { data, error, isLoading } = useGameDetails(game.id);
 
-    if (error || !data) return <AlertNotification errorMessage={error} />;
+    if (error) return <AlertNotification errorMessage={error} />;
 
     if (isLoading) return <Spinner />;
-
-    const htmlString = data.description;
-    const theObj = { __html: htmlString };
-
-    console.log(game);
 
     return (
         <Modal
@@ -53,7 +49,11 @@ const QuickLookWindow = ({ game, isOpen, onClose }: Props) => {
                     <Divider marginY={2} />
                     <StoreLinks game={game} />
                     <Divider marginY={2} />
-                    <div dangerouslySetInnerHTML={theObj} />
+                    <Text>
+                        {data.description_raw
+                            ? truncateText(data.description_raw, 500)
+                            : "..."}
+                    </Text>
                 </ModalBody>
             </ModalContent>
         </Modal>
